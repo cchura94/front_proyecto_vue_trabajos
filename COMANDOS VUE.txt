@@ -1,0 +1,19 @@
+0. npm install -g @vue/cli
+
+1. Creamos el proyecto de Vue.js
+    > vue create front_proyecto_vue_trabajos
+
+    - Manually select features
+    - Babel, PWA, Router, Vuex, CSS Pre-processors
+    - version vue: 3.x
+    - Use history mode for router: Yes
+    - CSS pre-processor: Sass/SCSS
+    - guardando en package.json
+
+2. Agregando Prime Vue en el proyecto de vue
+    > npm install primevue@^3.12.2 --save
+    > npm install primeicons --save
+    > npm install primeflex
+    > npm install chart.js
+    > npm install prismjs
+3. 
