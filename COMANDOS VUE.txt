@@ -16,4 +16,6 @@
     > npm install primeflex
     > npm install chart.js
     > npm install prismjs
-3. 
+    
+3. Instalamos axios para peticiones o ajax
+    > npm install axios

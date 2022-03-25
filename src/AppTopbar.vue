@@ -2,11 +2,13 @@
 	<div class="layout-topbar">
 		<router-link to="/" class="layout-topbar-logo">
 			<img alt="Logo" :src="topbarImage()" />
-			<span>SAKAI</span>
+			<span>SAKAI {{ $store.state.contador }} </span>
 		</router-link>
 		<button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle">
 			<i class="pi pi-bars"></i>
 		</button>
+
+		<span>{{ $store.state.usuario }}</span>
 
 		<button class="p-link layout-topbar-menu-button layout-topbar-button"
 			v-styleclass="{ selector: '@next', enterClass: 'hidden', enterActiveClass: 'scalein', 
