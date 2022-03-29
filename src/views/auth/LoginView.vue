@@ -72,7 +72,7 @@ export default {
             const {data} = await authService.login(usuario.value);
             console.log(data);
             if(!data.error){
-                store.commit("addUsuario")
+                store.dispatch("ingresoUsuario", data.user.email)
                 router.push({name: 'Admin'})
             }
        }

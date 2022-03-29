@@ -6,17 +6,23 @@ export default createStore({
     contador: 0,
     usuario: null
   },
-  getters: {
-    // retornar data
-  },
   mutations: {
     // modifica estados (data)
-    addUsuario(state){
-      state.usuario = "OSCAR"
+    actualizaUsuario(state, user){
+      state.usuario = user
     }
   },
   actions: {
     // methods
+    ingresoUsuario(context, u){
+      context.commit("actualizaUsuario", u)
+    }
+  },
+  getters: {
+    // retornar data
+    estaAuthenticado(state){
+      return state.usuario;
+    }
   },
   modules: {
   }
