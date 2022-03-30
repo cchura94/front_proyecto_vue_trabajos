@@ -10,6 +10,7 @@ import { createApp, reactive } from 'vue' // vue
 import AppWrapper from './AppWrapper.vue';
 
 import PrimeVue from 'primevue/config';
+import ProgressSpinner from 'primevue/progressspinner';
 import AutoComplete from 'primevue/autocomplete';
 import Accordion from 'primevue/accordion';
 import AccordionTab from 'primevue/accordiontab';
@@ -127,6 +128,7 @@ app.directive('code', CodeHighlight);
 app.directive('badge', BadgeDirective);
 app.directive('styleclass', StyleClass);
 
+app.component('ProgressSpinner', ProgressSpinner);
 app.component('Accordion', Accordion);
 app.component('AccordionTab', AccordionTab);
 app.component('AutoComplete', AutoComplete);
