@@ -55,7 +55,7 @@ export default {
                     label: 'Gestión Empresas', icon: 'pi pi-fw pi-search',
                     items: [
                         {
-                            label: 'Rubro', icon: 'pi pi-fw pi-bookmark', to: '/admin/categoria',
+                            label: 'Rubro', icon: 'pi pi-fw pi-bookmark', to: '/admin/rubro',
                         },
                         {
                             label: 'Empresas', icon: 'pi pi-fw pi-id-card', to: '/admin/publicaciones',

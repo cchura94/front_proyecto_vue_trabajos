@@ -5,6 +5,7 @@ import App from '../App.vue'
 import LoginView from '../views/auth/LoginView.vue'
 import CategoriaView from '../views/admin/categoria/CategoriaView.vue'
 import PublicacionView from '../views/admin/publicacion/PublicacionView.vue'
+import RubroView from '../views/admin/empresa/RubroView.vue'
 
 const routes = [
   {
@@ -24,7 +25,12 @@ const routes = [
         name: 'Publicacion',
         component: PublicacionView,
         // meta: {requireAuth: true},
-      }             
+      },
+      {
+        path: 'rubro',
+        name: 'Rubro',
+        component: RubroView,
+      }           
     ]
   },
   {
