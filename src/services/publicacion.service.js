@@ -1,8 +1,8 @@
 import { http } from './http'
 
-export function listaPublicaciones(page=1) {
+export function listaPublicaciones(page=1, limit=2) {
     // localhost:8000/api/v1/publicacion?page=1
-    return http().get(`/v1/publicacion?page=${page}`);    
+    return http().get(`/v1/publicacion?page=${page}&limit=${limit}`);    
 }
 
 export function guardarPublicacion(datos) {

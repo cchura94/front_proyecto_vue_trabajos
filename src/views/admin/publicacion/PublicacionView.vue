@@ -36,6 +36,36 @@
         </template>
       </Toolbar>
 
+      <DataTable ref="dt" :lazy="true" :value="publicaciones" v-model:selection="selectedPublicaciones" dataKey="id" 
+                :paginator="true" :rows="2" :filters="filters" :totalRecords="totalRecords"
+                :loading="loading" @page="onPage($event)"
+                paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[5,10,25]"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products" responsiveLayout="scroll">
+                <template #header>
+                    <div class="table-header flex flex-column md:flex-row md:justiify-content-between">
+						<h5 class="mb-2 md:m-0 p-as-md-center">Gestión Publicaciones</h5>
+						<span class="p-input-icon-left">
+                            <i class="pi pi-search" />
+                            <InputText v-model="filters['global'].value" placeholder="Search..." />
+                        </span>
+					</div>
+                </template>
+
+                <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
+                <Column field="titulo" header="Titulo" :sortable="true" style="min-width:10rem"></Column>
+                <Column field="nivel" header="Nivel" :sortable="true" style="min-width:10rem"></Column>
+                <Column field="categoria.nombre" header="Categoria" :sortable="true" style="min-width:10rem"></Column>
+                 <Column field="empresa.nombre" header="Empresa" :sortable="true" style="min-width:10rem"></Column>
+                <Column field="salario" header="Salario" :sortable="true" style="min-width:10rem"></Column>
+                
+                <Column :exportable="false" style="min-width:8rem">
+                    <template #body="slotProps">
+                        <Button icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" @click="editProduct(slotProps.data)" />
+                        <Button icon="pi pi-trash" class="p-button-rounded p-button-warning" @click="confirmDeleteProduct(slotProps.data)" />
+                    </template>
+                </Column>
+            </DataTable>
+
       <Dialog
         v-model:visible="publicacionDialog"
         :style="{ width: '650px' }"
@@ -248,6 +278,7 @@ persona_id
 
 <script>
 import { onMounted, ref } from "vue";
+import { FilterMatchMode } from 'primevue/api';
 import * as publicacionService from "./../../../services/publicacion.service.js";
 import * as categoriaService from "./../../../services/categoria.service.js"
 import * as empresaService from "./../../../services/empresa.service.js"
@@ -255,9 +286,9 @@ import * as empresaService from "./../../../services/empresa.service.js"
 export default {
   setup() {
     onMounted(async () => {
-      const { data } = await publicacionService.listaPublicaciones();
-      publicaciones.value = data;
-      console.log(publicaciones.value);
+      
+      listarPublicacion()
+
       const cat = await categoriaService.listaCategorias();
       categorias.value = cat.data
       const emp = await empresaService.listaEmpresas();
@@ -270,6 +301,15 @@ export default {
     const empresas = ref({});
     const publicacionDialog = ref(false);
     const submitted = ref(false);
+    const selectedPublicaciones = ref();
+    // paginacion lazy
+    const totalRecords = ref(0);
+    const loading = ref(false);
+    const lazyParams = ref({});
+
+    const filters = ref({
+            'global': {value: null, matchMode: FilterMatchMode.CONTAINS},
+        });
 
     const niveles = ref([
 	     	{label: 'JUNIOR', value: 'junior'},
@@ -283,6 +323,21 @@ export default {
             submitted.value = false;
             publicacionDialog.value = true;
         };
+
+    const onPage = (event) => {
+            lazyParams.value = event;
+            console.log(lazyParams.value)
+            listarPublicacion();
+        };
+    
+    const listarPublicacion = async () => {
+       loading.value = true;
+      const { data } = await publicacionService.listaPublicaciones(lazyParams.value.page + 1, lazyParams.value.rows);
+      publicaciones.value = data.data;
+      totalRecords.value = data.total
+      console.log(publicaciones.value);
+       loading.value = false;
+    }
     
     const guardarPublicacion = async () => {
             submitted.value = true;
@@ -303,6 +358,8 @@ export default {
                     toast.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
                 }*/
 
+                listarPublicacion()
+
                 publicacionDialog.value = false;
                 publicacion.value = {};
             }
@@ -318,6 +375,11 @@ export default {
       submitted,
       categorias,
       guardarPublicacion,
+      selectedPublicaciones,
+      filters,
+      totalRecords,
+      loading,
+      onPage,
     };
   },
 };

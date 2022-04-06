@@ -9,6 +9,11 @@ import RubroView from '../views/admin/empresa/RubroView.vue'
 
 const routes = [
   {
+    path: '/',
+    name: 'Inicio',
+    component: HomeView
+  },
+  {
     path: '/admin',
     name: 'Admin',
     component: App,
