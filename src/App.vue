@@ -58,7 +58,7 @@ export default {
                             label: 'Rubro', icon: 'pi pi-fw pi-bookmark', to: '/admin/rubro',
                         },
                         {
-                            label: 'Empresas', icon: 'pi pi-fw pi-id-card', to: '/admin/publicaciones',
+                            label: 'Empresas', icon: 'pi pi-fw pi-id-card', to: '/admin/empresa',
                         }
                     ]
                 },

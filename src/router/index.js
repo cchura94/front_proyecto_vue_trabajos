@@ -6,6 +6,7 @@ import LoginView from '../views/auth/LoginView.vue'
 import CategoriaView from '../views/admin/categoria/CategoriaView.vue'
 import PublicacionView from '../views/admin/publicacion/PublicacionView.vue'
 import RubroView from '../views/admin/empresa/RubroView.vue'
+import EmpresaView from '../views/admin/empresa/EmpresaView.vue'
 
 const routes = [
   {
@@ -35,7 +36,12 @@ const routes = [
         path: 'rubro',
         name: 'Rubro',
         component: RubroView,
-      }           
+      },
+      {
+        path: 'empresa',
+        name: 'Empresa',
+        component: EmpresaView,
+      }            
     ]
   },
   {
