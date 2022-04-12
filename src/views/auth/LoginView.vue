@@ -73,6 +73,8 @@ export default {
             console.log(data);
             if(!data.error){
                 store.dispatch("ingresoUsuario", data.user.email)
+                localStorage.setItem("token", data.access_token)
+
                 router.push({name: 'Admin'})
             }
        }
